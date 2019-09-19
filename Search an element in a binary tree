@@ -1,0 +1,13 @@
+bool checkNode(struct Node* node, int key) 
+{ 
+    if (node == NULL) 
+        return false; 
+  
+    if (node->data == key) 
+        return true; 
+        
+    bool res1 = checkNode(node->left, key); 
+    bool res2 = checkNode(node->right, key); 
+  
+    return res1 || res2; 
+} 
