@@ -31,3 +31,44 @@ public:
         return v;
     }
 };
+
+
+//2nd Method
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+     stack<TreeNode*> s;
+        TreeNode* t = root;
+        vector<int> v;
+    
+        while (!s.empty() || t) {
+        
+            while (t) {
+                s.push(t);
+                s.push(t);
+                t = t->left;
+            }
+            
+            t = s.top();
+            s.pop();
+            if (!s.empty() && t==s.top())
+                t = t->right;
+            else {
+                v.push_back(t->val);
+                t=NULL;
+            }
+                
+        }
+        return v;
+    }
+};
