@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+struct TreeNode* newNode(int val) 
+{ 
+    struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode)); 
+    node->val = val; 
+    node->left = NULL; 
+    node->right = NULL; 
+  
+    return node; 
+} 
+int search(int *arr, int start, int end, int value) 
+{ 
+    int j; 
+    for (j = start; j <= end; j++) { 
+        if (arr[j] == value) 
+            break; 
+    }
+    return j;
+} 
+
+struct TreeNode* constructTree(int * pre,int * in,int start,int end,int i)
+{
+   
+    if(start>end || i<0)
+        return NULL;
+    struct TreeNode* newn=newNode(pre[i]);
+    
+    int inIndex=search(in,start,end,pre[i]);
+    newn->left = constructTree(pre, in, start, inIndex - 1,i+1); 
+    newn->right = constructTree(pre, in, inIndex + 1,end,i+inIndex-start+1); 
+  
+    return newn; 
+    
+}
+
+struct TreeNode* buildTree(int* preorder, int preorderSize, int* inorder, int inorderSize){
+    if(preorderSize==0)
+        return NULL;
+return constructTree(preorder,inorder,0,inorderSize-1,0);
+    
+    
+}
+
