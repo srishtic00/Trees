@@ -24,3 +24,27 @@ for(it=m.begin();it!=m.end();++it)
     cout<<it->second.first<<" ";
 }
     }
+
+
+2nd method
+
+
+void left_view(TreeNode * root, vector<int> &res) {
+    if (!root) return;
+    left_view(root->left, res);
+    res.push_back(root->val);
+}
+
+void right_view(TreeNode * root, vector<int> &res) {
+    if (!root) return;
+    res.push_back(root->val);
+    right_view(root->right, res);
+}
+
+vector<int> Solution::solve(TreeNode* root) {
+    vector<int> res;
+    left_view(root->left, res);
+    res.push_back(root->val);
+    right_view(root->right, res);
+    return res;
+}
